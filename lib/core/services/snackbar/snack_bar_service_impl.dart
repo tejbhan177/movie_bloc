@@ -28,7 +28,6 @@ class SnackBarServiceImpl implements SnackBarService {
 
   @override
   void completeSnackBar(BuildContext context, SnackBarResponse response) {
-    Navigator.pop(context);
     _snackBarCompleter!.complete(response);
     _snackBarCompleter = null;
   }

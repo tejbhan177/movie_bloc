@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_bloc/core/constant/colors.dart';
 import 'package:movie_bloc/core/constant/env.dart';
+import 'package:movie_bloc/ui/widgets/shimmer/shimmer.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({Key? key, required this.url}) : super(key: key);
@@ -17,10 +18,12 @@ class MovieCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            CachedNetworkImage(
-              imageUrl: Env.imageBaseUrlW400 + url,
-              fit: BoxFit.cover,
-            ),
+            url.isEmpty
+                ? shimmer(size: MediaQuery.of(context).size)
+                : CachedNetworkImage(
+                    imageUrl: Env.imageBaseUrlW400 + url,
+                    fit: BoxFit.cover,
+                  ),
             const Align(
               alignment: Alignment.center,
               child: Center(

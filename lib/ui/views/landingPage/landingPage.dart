@@ -15,10 +15,13 @@ class LandingPage extends StatelessWidget {
             CustomSnackBar().showSnackBar(
                 context: context,
                 text: 'Disconnected',
-                buttonText: 'buttonText');
+                function: () => null,
+                buttonText: 'OK');
           } else if (state is Connected) {
             CustomSnackBar().showSnackBar(
-                context: context, text: 'Connected', buttonText: 'buttonText');
+                context: context, text: 'Connected',
+                function: () => null,
+                buttonText: 'OK');
           }
         },
         child: const Home());

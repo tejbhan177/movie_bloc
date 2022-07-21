@@ -5,6 +5,7 @@ import 'package:movie_bloc/core/data_sources/movies/movies_remote_data_source.da
 import 'package:movie_bloc/core/models/movie_trailer/trailer_model.dart';
 import 'package:movie_bloc/core/models/trending_movies/movie_response.dart';
 import 'package:movie_bloc/locator.dart';
+import 'package:movie_bloc/ui/widgets/shimmer/shimmer.dart';
 
 class MovieDetail extends StatefulWidget {
   const MovieDetail({Key? key, required this.detail}) : super(key: key);
@@ -37,7 +38,16 @@ class _MovieDetailState extends State<MovieDetail> {
                   elevation: 0.0,
                   flexibleSpace: FlexibleSpaceBar(
                       background: CachedNetworkImage(
-                    imageUrl: Env.imageBaseUrlW500 + info.posterPath!,
+                    imageUrl: Env.imageBaseUrlW500 + (info.posterPath ?? ''),
+                    placeholder: (ctx, str) {
+                      return shimmer(
+                          size: MediaQuery.of(context).size,
+                          height: 200,
+                          radius: 0);
+                    },
+                    errorWidget: (ctx, str, dynamic) {
+                      return const Icon(Icons.error);
+                    },
                     fit: BoxFit.cover,
                   )),
                 ),

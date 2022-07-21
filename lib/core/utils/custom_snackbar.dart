@@ -10,10 +10,12 @@ class CustomSnackBar {
   Future<void> showSnackBar(
       {required BuildContext context,
       required String text,
+      VoidCallback? function,
       required String buttonText}) async {
     final request = ConfirmSnackBarRequest(
       (r) => r
         ..message = text
+        ..onPressed = function
         ..buttonText = buttonText,
     );
     await _snackBarService!.showSnackBar(context, request);

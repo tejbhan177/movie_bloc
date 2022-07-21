@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:movie_bloc/ui/widgets/shimmer/shimmer.dart';
 
 class HomeShimmer extends StatelessWidget {
   const HomeShimmer({Key? key}) : super(key: key);
@@ -25,10 +25,14 @@ class HomeShimmer extends StatelessWidget {
           const SizedBox(
             height: 15.0,
           ),
-          shimmer(
-            size: size,
-            width: size.width * 0.8,
-            height: 20.0,
+          Padding(
+            padding: EdgeInsets.only(
+                left: size.width * 0.1, right: size.width * 0.1),
+            child: shimmer(
+              size: size,
+              width: size.width * 0.8,
+              height: 20.0,
+            ),
           ),
           const SizedBox(
             height: 15.0,
@@ -77,21 +81,4 @@ class HomeShimmer extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget shimmer(
-    {required Size size, double? width, double? height}) {
-  return SizedBox(
-    width: width,
-    height: height,
-    child: Shimmer.fromColors(
-      baseColor: Colors.grey[900]!,
-      highlightColor: Colors.black54,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[900]!,
-            borderRadius: const BorderRadius.all(Radius.circular(5.0))),
-      ),
-    ),
-  );
 }

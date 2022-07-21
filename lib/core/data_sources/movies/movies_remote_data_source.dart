@@ -1,5 +1,6 @@
 import 'package:movie_bloc/core/constant/api_routes.dart';
 import 'package:movie_bloc/core/models/movie_trailer/trailer_model.dart';
+import 'package:movie_bloc/core/models/search_movie/search_movie.dart';
 import 'package:movie_bloc/core/services/http/http_service.dart';
 import 'package:movie_bloc/locator.dart';
 import '../../models/trending_movies/movie_response.dart';
@@ -9,7 +10,7 @@ abstract class MoviesRemoteDataSource {
 
   Future<TrailerModel> fetchTrailer(int movieId);
 
-  Future<List<Result>> searchMovie(String query);
+  Future<List<Movie>> searchMovie(String query);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -32,12 +33,12 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   }
 
   @override
-  Future<List<Result>> searchMovie(String query) async {
+  Future<List<Movie>> searchMovie(String query) async {
     Map<String, dynamic> searchQuery = {};
     searchQuery['query'] = query;
     final response = await httpService!
         .getHttp(route: ApiRoutes.searchMovies, query: searchQuery);
-    List<Result> model = TrendingMovies.fromJson(response).results!;
-    return model;
+    final movies = MovieResponse.fromJson(response);
+    return movies.results!;
   }
 }

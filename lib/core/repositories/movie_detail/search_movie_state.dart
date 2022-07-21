@@ -10,7 +10,7 @@ class SearchError extends SearchMovieState {}
 class SearchInitial extends SearchMovieState {}
 
 class SearchSuccess extends SearchMovieState {
-  final List<Result> searchList;
+  final List<Movie> searchList;
 
   SearchSuccess({required this.searchList});
 }

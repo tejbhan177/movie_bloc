@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_bloc/core/constant/env.dart';
 import 'package:movie_bloc/core/models/trending_movies/movie_response.dart';
+import 'package:movie_bloc/core/navigation/navigation.dart';
 import 'package:movie_bloc/core/repositories/movie_repository/movie_repository_impl.dart';
 import 'package:movie_bloc/core/services/connectivity/connectivity_service.dart';
 import 'package:movie_bloc/locator.dart';
-import 'package:movie_bloc/ui/shared/fade_page_route.dart';
-import 'package:movie_bloc/ui/views/movie_detail/movie_detail.dart';
 import 'package:movie_bloc/ui/widgets/app_bar.dart';
 import 'package:movie_bloc/ui/widgets/movie_card.dart';
 import 'package:movie_bloc/ui/widgets/shimmer/shimmer_home.dart';
@@ -76,7 +75,8 @@ class _HomeState extends State<Home> {
           return InkResponse(
             enableFeedback: true,
             child: MovieCard(url: movieList[index].posterPath!),
-            onTap: () => openDetailPage(movieList[index]),
+            onTap: () => Navigate.openDetailPage(
+                context: context, recommendedMovie: movieList[index]),
           );
         });
   }
@@ -87,7 +87,8 @@ class _HomeState extends State<Home> {
       child: Stack(
         children: [
           GestureDetector(
-            onTap: () => openDetailPage(recommendedMovie),
+            onTap: () => Navigate.openDetailPage(
+                context: context, recommendedMovie: recommendedMovie),
             child: CachedNetworkImage(
               cacheKey: 'main',
               imageUrl: Env.imageBaseUrlW500 + recommendedMovie.posterPath!,
@@ -126,7 +127,8 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () => openDetailPage(recommendedMovie),
+                  onPressed: () => Navigate.openDetailPage(
+                      context: context, recommendedMovie: recommendedMovie),
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
                     textStyle: Theme.of(context).textTheme.displayMedium,
@@ -167,7 +169,10 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, size: 35,),
+          const Icon(
+            Icons.error_outline,
+            size: 35,
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -176,13 +181,5 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
-  }
-
-  openDetailPage(Result recommendedMovie) {
-    Navigator.push(
-        context,
-        FadePageRoute(
-            fullscreenDialog: true,
-            builder: (_) => MovieDetail(detail: recommendedMovie)));
   }
 }
