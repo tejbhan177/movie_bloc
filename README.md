@@ -4,7 +4,7 @@ Netflix clone flutter project using flutter_bloc package.
 
 ## Screenshots
 
-<img alt="Home Screen" height="600" src="assets/home.png" width="250"/>  <img alt="Movie Details Screen" height="600" src="assets/detail.png" width="250"/>  <img alt="Search Screen" height="600" src="assets/search.png" width="250"/>
+<img alt="Home Screen" height="550" src="assets/home.png" width="250"/>  <img alt="Movie Details Screen" height="550" src="assets/detail.png" width="250"/>  <img alt="Search Screen" height="550" src="assets/search.png" width="250"/>
 
 ## Folder structure
 
