@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_bloc/core/repositories/movie_detail/search_repository_impl.dart';
+import 'package:movie_bloc/core/repositories/search_repository/search_repository_impl.dart';
 import 'package:movie_bloc/core/repositories/movie_repository/movie_repository_impl.dart';
 import 'package:movie_bloc/core/services/connectivity/connectivity_service_impl.dart';
 

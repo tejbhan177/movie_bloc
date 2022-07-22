@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_bloc/ui/shared/fade_page_route.dart';
-import 'package:movie_bloc/ui/views/search/search_movie.dart';
+import 'package:movie_bloc/core/navigation/navigation.dart';
 
 PreferredSizeWidget customAppBar(BuildContext context) {
   return AppBar(
@@ -13,10 +12,7 @@ PreferredSizeWidget customAppBar(BuildContext context) {
     backgroundColor: Colors.black,
     actions: [
       IconButton(
-          onPressed: () => Navigator.push(
-              context,
-              FadePageRoute(
-                  fullscreenDialog: true, builder: (_) => const SearchMovie())),
+          onPressed: () => Navigate.openSearchPage(context),
           icon: const Icon(CupertinoIcons.search)),
       IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.sort_down))
     ],

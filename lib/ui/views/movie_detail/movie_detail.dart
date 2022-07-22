@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_bloc/core/constant/env.dart';
-import 'package:movie_bloc/core/data_sources/movies/movies_remote_data_source.dart';
 import 'package:movie_bloc/core/models/movie_trailer/trailer_model.dart';
 import 'package:movie_bloc/core/models/trending_movies/movie_response.dart';
+import 'package:movie_bloc/core/repositories/movie_repository/movie_repository.dart';
 import 'package:movie_bloc/locator.dart';
 import 'package:movie_bloc/ui/widgets/shimmer/shimmer.dart';
 
@@ -17,8 +17,7 @@ class MovieDetail extends StatefulWidget {
 }
 
 class _MovieDetailState extends State<MovieDetail> {
-  final MoviesRemoteDataSource? remoteDataSource =
-      locator<MoviesRemoteDataSource>();
+  final MovieRepository? _movieRepository = locator<MovieRepository>();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +115,7 @@ class _MovieDetailState extends State<MovieDetail> {
                           margin: const EdgeInsets.only(top: 8.0, bottom: 8.0)),
                       FutureBuilder(
                         future:
-                            remoteDataSource!.fetchTrailer(widget.detail.id!),
+                            _movieRepository!.fetchTrailer(widget.detail.id!),
                         builder:
                             (context, AsyncSnapshot<TrailerModel> snapshot) {
                           if (snapshot.hasData) {

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_bloc/core/models/search_movie/search_movie.dart';
 import 'package:movie_bloc/core/models/trending_movies/movie_response.dart';
 import 'package:movie_bloc/core/navigation/navigation.dart';
-import 'package:movie_bloc/core/repositories/movie_detail/search_repository_impl.dart';
+import 'package:movie_bloc/core/repositories/search_repository/search_repository_impl.dart';
 import 'package:movie_bloc/core/utils/debounce.dart';
 import 'package:movie_bloc/ui/widgets/movie_card.dart';
 import 'package:movie_bloc/ui/widgets/search_text_field.dart';
@@ -66,11 +66,21 @@ class _SearchMovieState extends State<SearchMovie> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                   ));
                 } else if (state is SearchSuccess) {
-                  return searchResult(
-                      searchList: state.searchList, orientation: orientation);
+                  if (state.searchList.isEmpty) {
+                    return const Center(
+                        child: Text(
+                      'No Result Found',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ));
+                  } else {
+                    return searchResult(
+                        searchList: state.searchList, orientation: orientation);
+                  }
                 } else if (state is SearchError) {
-                  return const Padding(
-                    padding: EdgeInsets.only(top: 200),
+                  return const Center(
                     child: Text(
                       'Error in loading data!',
                       style: TextStyle(
