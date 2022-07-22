@@ -1,16 +1,51 @@
-# movie_bloc
+# Movie app using Bloc Pattern
 
-A new Flutter project.
+Netflix clone flutter project using flutter_bloc package.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+<img alt="Home Screen" height="450" src="assets/home.png" width="250"/>  <img alt="Movie Details Screen" height="450" src="assets/detail.png" width="250"/>  <img alt="Search Screen" height="450" src="assets/search.png" width="250"/>
 
-A few resources to get you started if this is your first Flutter project:
+## Folder structure
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```bash
+.
+├── core
+│   ├── constant
+│   ├── data_sources
+│   ├── enums
+│   ├── exceptions
+│   ├── managers
+│   ├── navigation
+│   ├── models
+│   ├── repositories
+│   ├── services
+│   └── utils
+└── ui
+    ├── shared
+    ├── views
+    └── widgets
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+### Master branch
+
+- [x] json serialization
+- [x] connectivity service
+- [x] http service
+- [x] navigation service
+- [x] key storage service
+- [x] local storage service (NoSQL)
+- [x] life cycle manager to start/stop background services
+- [x] snack bar service
+
+## Example pages included
+
+- Home View (Renders a list of movies fetched from JSON place holder API [TMDB])
+- Movie Details Viw (Dynamic view that loads the movie information)
+- Search View (Dynamic view that loads the movies list on query)
+
+## API Documentation
+
+- [TMDB api documentation](https://developers.themoviedb.org/3/getting-started/introduction)

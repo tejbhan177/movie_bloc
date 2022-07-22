@@ -2,7 +2,7 @@
     package="com.tejbhan.movie_bloc">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="movie_bloc"
+        android:label="Netflix"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

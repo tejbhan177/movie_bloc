@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: customAppBar(context),
       body: SafeArea(
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
               children: [
                 suggestMovie(size, state.recommendedMovie),
                 const SizedBox(height: 30),
-                buildList(state.movieList),
+                buildList(movieList: state.movieList, orientation: orientation),
               ],
             );
           } else {
@@ -61,13 +62,14 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildList(List<Result> movieList) {
+  Widget buildList(
+      {required List<Result> movieList, required Orientation orientation}) {
     return GridView.builder(
         itemCount: movieList.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: orientation == Orientation.portrait ? 3 : 6,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
             childAspectRatio: 2 / 3),

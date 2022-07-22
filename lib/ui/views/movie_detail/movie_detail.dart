@@ -22,6 +22,7 @@ class _MovieDetailState extends State<MovieDetail> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     var info = widget.detail;
     return Scaffold(
       body: SafeArea(
@@ -120,7 +121,9 @@ class _MovieDetailState extends State<MovieDetail> {
                             (context, AsyncSnapshot<TrailerModel> snapshot) {
                           if (snapshot.hasData) {
                             if (snapshot.data!.results.isNotEmpty) {
-                              return trailerLayout(snapshot.data!);
+                              return trailerLayout(
+                                  data: snapshot.data!,
+                                  orientation: orientation);
                             } else {
                               return noTrailer();
                             }
@@ -150,13 +153,14 @@ class _MovieDetailState extends State<MovieDetail> {
     );
   }
 
-  Widget trailerLayout(TrailerModel data) {
+  Widget trailerLayout(
+      {required TrailerModel data, required Orientation orientation}) {
     return GridView.builder(
         itemCount: data.results.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: orientation == Orientation.portrait ? 2 : 4,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
             childAspectRatio: 16 / 10),

@@ -28,6 +28,7 @@ class _SearchMovieState extends State<SearchMovie> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     SearchRepositoryImpl searchCubit =
         BlocProvider.of<SearchRepositoryImpl>(context);
     return Scaffold(
@@ -65,7 +66,8 @@ class _SearchMovieState extends State<SearchMovie> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                   ));
                 } else if (state is SearchSuccess) {
-                  return searchResult(state.searchList);
+                  return searchResult(
+                      searchList: state.searchList, orientation: orientation);
                 } else if (state is SearchError) {
                   return const Padding(
                     padding: EdgeInsets.only(top: 200),
@@ -88,7 +90,8 @@ class _SearchMovieState extends State<SearchMovie> {
     );
   }
 
-  Widget searchResult(List<Movie> searchList) {
+  Widget searchResult(
+      {required List<Movie> searchList, required Orientation orientation}) {
     return ListView(
       children: [
         const Padding(
@@ -105,8 +108,8 @@ class _SearchMovieState extends State<SearchMovie> {
             itemCount: searchList.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: orientation == Orientation.portrait ? 3 : 6,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
                 childAspectRatio: 2 / 3),
