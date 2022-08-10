@@ -1,6 +1,6 @@
 # Movie app using Bloc Pattern
 
-Netflix clone flutter project using flutter_bloc package.
+Netflix app clone flutter project using flutter_bloc package.
 
 ## Screenshots
 
